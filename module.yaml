@@ -2,22 +2,20 @@ name: gitops-mas-iot
 type: gitops
 description: Module to populate a gitops repo with the resources to provision mas-iot
 tags:
-  - tools
   - gitops
 versions:
   - platforms:
-      - kubernetes
-      - ocp3
       - ocp4
     dependencies:
       - id: gitops
         refs:
           - source: github.com/cloud-native-toolkit/terraform-tools-gitops.git
             version: '>= 1.1.0'
-      - id: namespace
+      - id: jdbc
         refs:
-          - source: github.com/cloud-native-toolkit/terraform-gitops-namespace.git
+          - source: github.com/cloud-native-toolkit/terraform-gitops-mas-jdbc.git
             version: '>= 1.0.0'
+        optional: true
     variables:
       - name: gitops_config
         moduleRef:
@@ -39,3 +37,7 @@ versions:
         moduleRef:
           id: gitops
           output: sealed_secrets_cert
+      - name: jdbc_scope
+        moduleRef:
+          id: jdbc
+          output: scope
