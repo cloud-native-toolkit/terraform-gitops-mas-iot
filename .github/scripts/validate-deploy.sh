@@ -62,7 +62,14 @@ if [[ $count -eq 30 ]]; then
 fi
 
 
-#check_k8s_resource "${NAMESPACE}" "deployment" "${COMPONENT_NAME}"
+check_k8s_resource "${NAMESPACE}" "deployment" "webui-api-dashboard"
+
+check_k8s_resource "${NAMESPACE}" "deployment" "provision-operator"
+
+check_k8s_resource "${NAMESPACE}" "deployment" "datapower-operator"
+
+check_k8s_resource "${NAMESPACE}" "deployment" "datapower-datapower"
+
 
 cd ..
 rm -rf .testrepo

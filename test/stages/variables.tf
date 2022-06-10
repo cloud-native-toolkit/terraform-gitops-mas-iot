@@ -75,3 +75,19 @@ variable "kubeseal_namespace" {
 
 variable "cp_entitlement_key" {
 }
+
+variable "database_username" {
+  type = string
+}
+
+variable "database_password" {
+  type = string
+}
+
+variable "database_url" {
+  type = string
+}
+
+variable "database_cert" {
+  type = string
+}
