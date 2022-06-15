@@ -1,6 +1,4 @@
 module "gitops_module" {
-  depends_on = [module.masjdbc]
-  
   source = "./module"
 
   gitops_config = module.gitops.gitops_config
@@ -8,7 +6,7 @@ module "gitops_module" {
   server_name = module.gitops.server_name
   kubeseal_cert = module.gitops.sealed_secrets_cert
 
-  instanceid = "masdemo"
+  instanceid = module.mas_kafka.instanceid
   workspace_id = "demo"
   entitlement_key = module.cp_catalogs.entitlement_key
   jdbc_scope = module.masjdbc.scope

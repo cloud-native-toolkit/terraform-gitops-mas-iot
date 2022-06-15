@@ -13,7 +13,6 @@ locals {
   application_branch = "main"
   appname            = "ibm-mas-${var.appid}"
   namespace          = "mas-${var.instanceid}-${var.appid}"
-  core-namespace     = "mas-${var.instanceid}-core"
   layer_config       = var.gitops_config[local.layer]
   installPlan        = var.installPlan
 
@@ -24,7 +23,6 @@ locals {
           appid = var.appid
           instanceid = var.instanceid
           namespace = local.namespace
-          core-namespace = local.core-namespace
           workspaceid = var.workspace_id
         }
         workspace = {

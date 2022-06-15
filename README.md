@@ -1,6 +1,5 @@
 #  Maximo Application Suite - MAS IoT Application Gitops terraform module
 
-
 Deploys MAS IoT applications as part of Maximo Application Suite via gitops.  To run, download the BOM (Bill of Materials) from the module catalog and build the terraform from there.  Specify the MAS-Core instance id - in the `instanceid` variable.  This will create a namespace of the name `mas-(instanceid)-iot`.
 
 Note if your cluster is not setup for gitops, download the gitops bootstrap BOM from the module catalog first to setup the gitops tooling.
