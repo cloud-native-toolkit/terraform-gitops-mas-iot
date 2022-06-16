@@ -120,3 +120,9 @@ variable "jdbc_scope" {
   description = "JDBC config scope. Will stay at default for most deployments"
   default     = "system"
 }
+
+variable "workspace_id" {
+  type        = string
+  description = "MAS Workspace ID to deploy to"
+  default     = "demo"
+}

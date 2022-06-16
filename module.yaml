@@ -1,6 +1,6 @@
 name: gitops-mas-iot
 type: gitops
-description: Module to populate a gitops repo with the resources to provision mas-iot
+description: Module to populate a gitops repo with the resources to provision mas iot app
 tags:
   - gitops
 versions:
@@ -29,10 +29,6 @@ versions:
         moduleRef:
           id: gitops
           output: server_name
-      - name: namespace
-        moduleRef:
-          id: namespace
-          output: name
       - name: kubeseal_cert
         moduleRef:
           id: gitops
