@@ -28,6 +28,7 @@ modules can help provide the required information:
 - Cert:  github.com/cloud-native-toolkit/terraform-util-sealed-secret-cert
 - Cluster: github.com/cloud-native-toolkit/terraform-ocp-login
 - CertManager: github.com/cloud-native-toolkit/terraform-gitops-ocp-cert-manager
+- Strimzi: github.com/cloud-native-toolkit/terraform-gitops-kafka-strimzi
 - Kafka: github.com/cloud-native-toolkit/terraform-gitops-mas-kafka
 - JDBC: github.com/cloud-native-toolkit/terraform-gitops-mas-jdbc
 
@@ -42,8 +43,10 @@ module "mas_iot" {
   server_name = module.gitops.server_name
   kubeseal_cert = module.gitops.sealed_secrets_cert
 
-  instanceid = "masdemo"
+  instanceid = module.mas_kafka.instanceid
   workspace_id = "demo"
   entitlement_key = module.cp_catalogs.entitlement_key
+  jdbc_scope = module.masjdbc.scope
+ 
 }
 ```
