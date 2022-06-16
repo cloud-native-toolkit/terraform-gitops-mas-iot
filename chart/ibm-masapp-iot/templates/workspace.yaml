@@ -1,11 +1,11 @@
 apiVersion: iot.ibm.com/v1
 kind: IoTWorkspace
 metadata:
-  name: "{{ .Values.workspace.name }}"
+  name: {{ .Values.workspace.name | quote }}
   labels:
-    mas.ibm.com/instanceId: "{{ .Values.masapp.instanceid }}"
-    mas.ibm.com/workspaceId: "{{ .Values.masapp.workspaceid }}"
-    mas.ibm.com/applicationId: "{{ .Values.masapp.appid }}"
+    mas.ibm.com/instanceId: {{ .Values.masapp.instanceid | quote  }}
+    mas.ibm.com/workspaceId: {{ .Values.masapp.workspaceid | quote  }}
+    mas.ibm.com/applicationId: {{ .Values.masapp.appid | quote  }}
     {{- include "ibm-masapp-iot.labels" . | nindent 4 }}
   annotations:
     argocd.argoproj.io/sync-wave: "3" 

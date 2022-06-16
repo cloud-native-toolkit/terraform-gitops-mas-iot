@@ -94,10 +94,6 @@ resource "null_resource" "deployAppValsOperator" {
 # Add values for instance charts
 resource "null_resource" "deployAppVals" {
 
-  triggers = {
-    addons = join(",", var.addons)
-  }
-
   provisioner "local-exec" {
     command = "${path.module}/scripts/create-yaml.sh '${local.name}' '${local.yaml_dir}'"
 
