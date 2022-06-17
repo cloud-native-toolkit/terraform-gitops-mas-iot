@@ -133,5 +133,3 @@ resource gitops_module masapp {
   config      = yamlencode(var.gitops_config)
   credentials = yamlencode(var.git_credentials)
 }
-
-

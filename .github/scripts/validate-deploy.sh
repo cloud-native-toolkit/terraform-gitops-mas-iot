@@ -71,7 +71,7 @@ check_k8s_resource "${NAMESPACE}" "deployment" "datapower-operator"
 check_k8s_resource "${NAMESPACE}" "deployment" "datapower-datapower"
 
 # REMOVE BEFORE RELEASE - this is just to let things settle
-sleep 45m
+sleep 35m
 
 cd ..
 rm -rf .testrepo
