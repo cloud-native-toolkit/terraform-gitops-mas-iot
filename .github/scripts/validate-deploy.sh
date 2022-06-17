@@ -72,19 +72,14 @@ check_k8s_resource "${NAMESPACE}" "deployment" "datapower-datapower"
 
 check_k8s_resource "${NAMESPACE}" "deployment" "mbgx-api-mbgadmin"
 
-# wait for worspace deploy to complete
-sleep 5m
-
 # check workspace config in app namespace is in ready state
-cfgstatus=$(kubectl get IoT ${INSTANCEID} -n ${NAMESPACE} --no-headers -o custom-columns=":status.conditions[0].type")
-
-IoT masdemo -n mas-masdemo-iot
+cfgstatus=$(kubectl get iots.iot.ibm.com ${INSTANCEID} -n ${NAMESPACE} --no-headers -o custom-columns=":status.conditions[0].type")
 
 count=0
 until [[ "${cfgstatus}" = "Ready" ]] || [[ $count -eq 60 ]]; do
   echo "Waiting for ${INSTANCEID} in ${CORENAMESPACE}"
   count=$((count + 1))
-  cfgstatus=$(kubectl get IoT ${INSTANCEID} -n ${NAMESPACE} --no-headers -o custom-columns=":status.conditions[0].type")
+  cfgstatus=$(kubectl get iots.iot.ibm.com ${INSTANCEID} -n ${NAMESPACE} --no-headers -o custom-columns=":status.conditions[0].type")
   sleep 60
 done
 
