@@ -31,7 +31,7 @@ TYPE=$(jq -r '.type // "base"' gitops-output.json)
 
 APPNAME=$(jq -r '.appname // "manage"' gitops-output.json)
 WSNAME=$(jq -r '.ws_name // "demo"' gitops-output.json)
-INSTNAME=$(jq -r '.inst_name // "masdemo"' gitops-output.json)
+INSTANCEID=$(jq -r '.inst_name // "masdemo"' gitops-output.json)
 
 mkdir -p .testrepo
 
@@ -70,8 +70,32 @@ check_k8s_resource "${NAMESPACE}" "deployment" "datapower-operator"
 
 check_k8s_resource "${NAMESPACE}" "deployment" "datapower-datapower"
 
-# REMOVE BEFORE RELEASE - this is just to let things settle
-sleep 35m
+check_k8s_resource "${NAMESPACE}" "deployment" "mbgx-api-mbgadmin"
+
+# wait for worspace deploy to complete
+sleep 5m
+
+# check workspace config in app namespace is in ready state
+cfgstatus=$(kubectl get IoT ${INSTANCEID} -n ${NAMESPACE} --no-headers -o custom-columns=":status.conditions[0].type")
+
+IoT masdemo -n mas-masdemo-iot
+
+count=0
+until [[ "${cfgstatus}" = "Ready" ]] || [[ $count -eq 60 ]]; do
+  echo "Waiting for ${INSTANCEID} in ${CORENAMESPACE}"
+  count=$((count + 1))
+  cfgstatus=$(kubectl get IoT ${INSTANCEID} -n ${NAMESPACE} --no-headers -o custom-columns=":status.conditions[0].type")
+  sleep 60
+done
+
+if [[ $count -eq 60 ]]; then
+  echo "Timed out waiting for ${INSTANCEID} to become ready in ${NAMESPACE}"
+  kubectl get all -n "${NAMESPACE}"
+  exit 1
+fi
+
+# wait for config to settle before destroy
+sleep 10m
 
 cd ..
 rm -rf .testrepo

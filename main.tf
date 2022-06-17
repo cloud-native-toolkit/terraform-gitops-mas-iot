@@ -75,9 +75,6 @@ module "pullsecret" {
   secret_name = "ibm-entitlement"
 }
 
-## do we need jdbc config?? yes - set to system most likely but may do this in bom as optional
-
-
 # Add values for operator chart
 resource "null_resource" "deployAppValsOperator" {
 

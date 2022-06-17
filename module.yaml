@@ -16,6 +16,10 @@ versions:
           - source: github.com/cloud-native-toolkit/terraform-gitops-mas-jdbc.git
             version: '>= 1.0.0'
         optional: true
+      - id: kafka
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-gitops-mas-kafka.git
+            version: '>= 1.0.0' 
     variables:
       - name: gitops_config
         moduleRef:
@@ -37,3 +41,7 @@ versions:
         moduleRef:
           id: jdbc
           output: scope
+      - name: instanceid
+        moduleRef:
+          id: kafka
+          output: instanceid
